@@ -2,13 +2,13 @@ import { FC } from "react";
 import classes from "./Form.module.scss";
 import { ArrowIcon, FBIcon, GoogleIcon, VKIcon } from "../common";
 import { FieldValues, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 interface FormPropsTypes {
-  createAccount: boolean;
-  setFormContent: () => void;
+  createAccount?: boolean;
 }
 
-export const Form: FC<FormPropsTypes> = ({ createAccount, setFormContent }) => {
+export const Form: FC<FormPropsTypes> = ({ createAccount }) => {
   const {
     register,
     handleSubmit,
@@ -87,9 +87,20 @@ export const Form: FC<FormPropsTypes> = ({ createAccount, setFormContent }) => {
           </button>
         </a>
       </div>
-      <button onClick={setFormContent} className={classes.createAccount}>
-        {createAccount ? "СОЗДАТЬ АККАУНТ" : "У МЕНЯ УЖЕ ЕСТЬ АККАУНТ"}
-      </button>
+      {createAccount ? (
+        <Link to={"/registration"}>
+          <button className={classes.createAccount}>СОЗДАТЬ АККАУНТ</button>
+        </Link>
+      ) : (
+        <Link to={"/login"}>
+          <button className={classes.createAccount}>
+            У МЕНЯ УЖЕ ЕСТЬ АККАУНТ
+          </button>
+        </Link>
+      )}
+      {/*<button className={classes.createAccount}>*/}
+      {/*  {createAccount ? "СОЗДАТЬ АККАУНТ" : "У МЕНЯ УЖЕ ЕСТЬ АККАУНТ"}*/}
+      {/*</button>*/}
       {!createAccount && (
         <div className={classes.agreement}>
           Регистрируясь, ты соглашаешься с условиями

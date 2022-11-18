@@ -67,7 +67,7 @@
     cursor: not-allowed;
   }
   &__error {
-    color: red;
+    color: #ff0000ff;
     margin-bottom: 12px;
   }
 }
@@ -127,6 +127,9 @@
   text-align: center;
   margin-bottom: 10px;
   text-shadow: 0 0 16px hsl(0deg 0% 100% / 64%);
+  a {
+    text-decoration: underline;
+  }
   & a:hover {
     text-decoration: none;
   }
