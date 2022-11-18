@@ -1,21 +1,18 @@
+import { useState } from "react";
 import classes from "./Main.module.scss";
 import { Form } from "../Form/Form";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 export const Main = () => {
-  const navigate = useNavigate();
+  const [formContent, setFormContent] = useState(true);
 
-  useEffect(() => {
-    navigate("login");
-  }, []);
+  const formContentToggle = () => {
+    setFormContent(!formContent);
+  };
+
   return (
     <div className={classes.main}>
       <div className={classes.overlay} />
-      <Routes>
-        <Route path="/login" element={<Form createAccount />} />
-        <Route path="/registration" element={<Form />} />
-      </Routes>
+      <Form createAccount={formContent} setFormContent={formContentToggle} />
     </div>
   );
 };
