@@ -16,7 +16,7 @@ export const Form: FC<FormPropsTypes> = ({ createAccount, setFormContent }) => {
   } = useForm<{ email: string; password: string }>();
 
   const onSubmit = (e: FieldValues) => {
-    console.log(e);
+    console.log("inputs");
   };
 
   return (
