@@ -19,8 +19,7 @@ export const Form: FC<FormPropsTypes> = ({ createAccount, setFormContent }) => {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const {} = e;
-    console.log(inputs);
+    console.log("inputs");
   };
 
   // console.log(inputs);
