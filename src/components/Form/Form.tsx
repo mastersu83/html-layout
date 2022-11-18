@@ -19,8 +19,6 @@ export const Form: FC<FormPropsTypes> = ({ createAccount, setFormContent }) => {
     console.log(e);
   };
 
-  console.log(errors);
-
   return (
     <div className={classes.form__wrapper}>
       <div className={classes.goBackArrow}>
