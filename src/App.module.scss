@@ -1,0 +1,10 @@
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-image: url(https://lingualeo.com/_next/static/media/bottom-left.08b5d3029a3639cfd050dd8cc6d286c7.png),
+    url(https://lingualeo.com/_next/static/media/top-right.b1c1aaea4d1f662b258e48bee4db7b29.png);
+  background-position: 0 100%, 100% 0;
+  background-repeat: no-repeat;
+  background-size: 50% auto, 50% auto;
+}
