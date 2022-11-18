@@ -41,9 +41,7 @@ export const Form: FC<FormPropsTypes> = ({ createAccount, setFormContent }) => {
           type="email"
           placeholder="E-mail"
         />
-        <div className={classes.form__error}>
-          {errors?.email && <span>{errors?.email?.message || "Error"}</span>}
-        </div>
+        <div className={classes.form__error}></div>
         <input
           {...register("password", {
             required: "Поле обязательно к заполнению",
