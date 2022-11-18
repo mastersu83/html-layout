@@ -13,12 +13,13 @@
     width: 280px;
     display: flex;
     flex-direction: column;
+    align-items: center;
   }
   &__title {
     color: #37383c;
     font-size: 16px;
     font-weight: 600;
-    padding-bottom: 17px;
+    padding-bottom: 12px;
     text-shadow: 0 0 16px hsl(0deg 0% 100% / 64%);
     text-transform: uppercase;
   }
@@ -41,6 +42,7 @@
     background-color: transparent;
     border: none;
     box-shadow: none;
+    width: max-content;
     color: #7e919f;
     font-size: 14px;
     height: auto;
@@ -63,6 +65,10 @@
     text-transform: uppercase;
     width: 100%;
     cursor: not-allowed;
+  }
+  &__error {
+    color: red;
+    margin-bottom: 12px;
   }
 }
 

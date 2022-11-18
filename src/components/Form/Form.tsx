@@ -1,6 +1,7 @@
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { FC } from "react";
 import classes from "./Form.module.scss";
 import { ArrowIcon, FBIcon, GoogleIcon, VKIcon } from "../common";
+import { FieldValues, useForm } from "react-hook-form";
 
 interface FormPropsTypes {
   createAccount: boolean;
@@ -8,21 +9,18 @@ interface FormPropsTypes {
 }
 
 export const Form: FC<FormPropsTypes> = ({ createAccount, setFormContent }) => {
-  const [inputs, setInputs] = useState({
-    email: "",
-    password: "",
-  });
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setInputs({ ...inputs, [name]: value });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm<{ email: string; password: string }>();
+
+  const onSubmit = (e: FieldValues) => {
+    console.log(e);
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("inputs");
-  };
+  console.log(errors);
 
-  // console.log(inputs);
   return (
     <div className={classes.form__wrapper}>
       <div className={classes.goBackArrow}>
@@ -31,24 +29,34 @@ export const Form: FC<FormPropsTypes> = ({ createAccount, setFormContent }) => {
       <span className={classes.form__title}>
         {createAccount ? "ВОЙТИ" : "БЕСПЛАТНАЯ РЕГИСТРАЦИЯ"}
       </span>
-      <form onSubmit={onSubmit} className={classes.form__inner}>
+      <div className={classes.form__error}>
+        {errors?.password && (
+          <span>{errors?.password?.message || "Error"}</span>
+        )}
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className={classes.form__inner}>
         <input
-          onChange={onChange}
-          name="email"
+          {...register("email", {
+            required: true,
+          })}
           className={classes.form__input}
           type="email"
           placeholder="E-mail"
-          value={inputs.email}
-          required
         />
+        <div className={classes.form__error}>
+          {errors?.email && <span>{errors?.email?.message || "Error"}</span>}
+        </div>
         <input
-          onChange={onChange}
-          name="password"
+          {...register("password", {
+            required: "Поле обязательно к заполнению",
+            minLength: {
+              value: 5,
+              message: "Слишком короткий пароль",
+            },
+          })}
           className={classes.form__input}
           type="password"
           placeholder="Пароль"
-          value={inputs.password}
-          required
         />
         {createAccount && (
           <button type="button" className={classes.form__restore}>
@@ -56,12 +64,9 @@ export const Form: FC<FormPropsTypes> = ({ createAccount, setFormContent }) => {
           </button>
         )}
         <button
-          disabled={inputs.email.length === 0 || inputs.password.length < 5}
           type="submit"
           className={`${classes.form__button} ${
-            inputs.email.length && inputs.password.length > 4
-              ? classes.activeBtn
-              : ""
+            isValid ? classes.activeBtn : ""
           }`}
         >
           {createAccount ? "ВОЙТИ" : "СОЗДАТЬ АККАУНТ"}
